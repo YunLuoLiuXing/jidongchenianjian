@@ -1,0 +1,302 @@
+/* 全局样式 — 液态玻璃设计系统 */
+
+page {
+  --page-1: #0B1220;
+  --page-2: #131C2E;
+  --page-3: #0A101C;
+  --text-primary: #F2F6FC;
+  --text-secondary: rgba(242, 246, 252, 0.62);
+  --text-tertiary: rgba(242, 246, 252, 0.42);
+  --glass-top: rgba(255, 255, 255, 0.16);
+  --glass-mid: rgba(255, 255, 255, 0.09);
+  --glass-bottom: rgba(255, 255, 255, 0.04);
+  --glass-border-top: rgba(255, 255, 255, 0.32);
+  --glass-border-bottom: rgba(255, 255, 255, 0.06);
+  --opaque-top: #1B2740;
+  --opaque-bottom: #141C2E;
+  --accent-top: #4C8EF5;
+  --accent-bottom: #2A62C4;
+  --c-gray: #8A94A6;
+  --c-green: #34C759;
+  --c-amber: #FF9F0A;
+  --c-red: #FF453A;
+
+  background: linear-gradient(180deg, var(--page-1) 0%, var(--page-2) 55%, var(--page-3) 100%);
+  min-height: 100vh;
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 浅色主题 */
+.light {
+  --page-1: #EAF0F9;
+  --page-2: #F4F7FC;
+  --page-3: #E6EDF7;
+  --text-primary: #101828;
+  --text-secondary: rgba(16, 24, 40, 0.62);
+  --text-tertiary: rgba(16, 24, 40, 0.42);
+  --glass-top: rgba(255, 255, 255, 0.95);
+  --glass-mid: rgba(255, 255, 255, 0.82);
+  --glass-bottom: rgba(255, 255, 255, 0.70);
+  --glass-border-top: rgba(255, 255, 255, 1);
+  --glass-border-bottom: rgba(15, 23, 42, 0.08);
+  --opaque-top: #FDFEFF;
+  --opaque-bottom: #F1F5FB;
+  --accent-top: #3D7DE8;
+  --accent-bottom: #1F55BC;
+  --c-gray: #98A2B3;
+  --c-green: #1FA84A;
+  --c-amber: #E07B00;
+  --c-red: #D92D20;
+}
+
+.page-wrap {
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding-bottom: 40rpx;
+  box-sizing: border-box;
+}
+
+/* 页面标题 */
+.page-header {
+  padding: 48rpx 40rpx 24rpx;
+}
+
+.page-title {
+  font-size: 52rpx;
+  font-weight: 700;
+  letter-spacing: -1rpx;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.page-subtitle {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+/* 液态玻璃面板 */
+.glass {
+  position: relative;
+  border-radius: 32rpx;
+  padding: 2rpx;
+  background: linear-gradient(180deg, var(--glass-border-top) 0%, var(--glass-border-bottom) 100%);
+  box-shadow: 0 12rpx 40rpx rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+}
+
+.glass-inner {
+  border-radius: 30rpx;
+  background: linear-gradient(180deg, var(--glass-top) 0%, var(--glass-mid) 48%, var(--glass-bottom) 100%);
+  backdrop-filter: blur(40rpx) saturate(1.4);
+  -webkit-backdrop-filter: blur(40rpx) saturate(1.4);
+  padding: 32rpx;
+  box-sizing: border-box;
+}
+
+/* 不透明玻璃（时间轴用） */
+.glass.opaque {
+  background: linear-gradient(180deg, var(--glass-border-top) 0%, var(--glass-border-bottom) 100%);
+}
+
+.glass.opaque .glass-inner {
+  background: linear-gradient(180deg, var(--opaque-top) 0%, var(--opaque-bottom) 100%);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 24rpx;
+}
+
+/* 卡片间距 */
+.card-gap {
+  margin: 0 24rpx 24rpx;
+}
+
+/* 表单标签 */
+.field-label {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 10rpx;
+}
+
+.required-star {
+  color: var(--c-red);
+  font-size: 36rpx;
+  font-weight: 700;
+  margin-left: 6rpx;
+  line-height: 1;
+}
+
+/* 输入框（玻璃底） */
+.field-box {
+  height: 88rpx;
+  border-radius: 20rpx;
+  padding: 0 24rpx;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  background: var(--glass-mid);
+  border: 2rpx solid var(--glass-border-bottom);
+  color: var(--text-primary);
+}
+
+.field-box.placeholder {
+  color: var(--text-tertiary);
+}
+
+.field-box.error {
+  background: rgba(255, 69, 58, 0.16);
+  border-color: var(--c-red);
+  color: var(--c-red);
+}
+
+/* 选择行 */
+.field-row {
+  display: flex;
+  gap: 16rpx;
+}
+
+.field-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.field-col.wide {
+  flex: 1.6;
+}
+
+/* 必填错误提示 */
+.field-error-text {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: var(--c-red);
+}
+
+/* 抖动动画 */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-16rpx); }
+  30% { transform: translateX(16rpx); }
+  45% { transform: translateX(-16rpx); }
+  60% { transform: translateX(16rpx); }
+  75% { transform: translateX(-8rpx); }
+  90% { transform: translateX(8rpx); }
+}
+
+.shake {
+  animation: shake 0.55s ease-in-out;
+}
+
+/* 主按钮 */
+.btn-primary {
+  height: 96rpx;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: linear-gradient(180deg, var(--accent-top) 0%, var(--accent-bottom) 100%);
+  box-shadow: 0 12rpx 32rpx rgba(42, 98, 196, 0.38);
+  border: 2rpx solid rgba(255, 255, 255, 0.22);
+  transition: transform 0.12s ease;
+}
+
+.btn-primary:active {
+  transform: scale(0.972);
+}
+
+/* 勾选项 */
+.check-row {
+  display: flex;
+  align-items: center;
+  padding: 10rpx 0;
+}
+
+.check-box {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 10rpx;
+  border: 2rpx solid var(--glass-border-top);
+  background: var(--glass-mid);
+  margin-right: 14rpx;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.check-box.on {
+  background: linear-gradient(180deg, var(--accent-top), var(--accent-bottom));
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.check-mark {
+  width: 16rpx;
+  height: 9rpx;
+  border-left: 4rpx solid #FFF;
+  border-bottom: 4rpx solid #FFF;
+  transform: rotate(-45deg) translate(1rpx, -2rpx);
+}
+
+.check-text {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* 状态色 */
+.c-gray { color: var(--c-gray); }
+.c-green { color: var(--c-green); }
+.c-amber { color: var(--c-amber); }
+.c-red { color: var(--c-red); }
+
+/* ===== 深色模式文字兜底：确保所有文本默认白色 ===== */
+view, text, scroll-view, picker {
+  color: inherit;
+}
+
+/* 确保内容区默认使用主题文字色 */
+.page-wrap,
+.glass-inner {
+  color: var(--text-primary);
+}
+
+/* 时间轴文字 */
+.tl-title { color: var(--text-primary); font-size: 28rpx; font-weight: 500; }
+.tl-date { color: var(--text-secondary); font-size: 24rpx; margin-top: 4rpx; }
+.tl-hint { color: var(--c-red); font-size: 22rpx; margin-top: 4rpx; }
+.tl-node.active .tl-title { color: var(--c-red); font-size: 56rpx; font-weight: 700; }
+.tl-node.active .tl-date { color: var(--c-red); font-size: 48rpx; font-weight: 700; }
+
+/* 状态卡 */
+.status-big { font-size: 40rpx; font-weight: 700; line-height: 1.25; }
+.status-text { font-size: 28rpx; color: var(--text-secondary); margin-top: 8rpx; }
+
+/* 空状态 */
+.empty-text { color: var(--text-tertiary); font-size: 26rpx; text-align: center; padding: 24rpx 0; }
+
+/* 报废提示 */
+.scrap-note { font-size: 26rpx; font-weight: 600; }
+.scrap-detail { font-size: 22rpx; line-height: 1.7; margin-top: 8rpx; }
+
+/* 逾期提示 */
+.overdue-title { font-size: 28rpx; font-weight: 700; color: var(--c-red); }
+.overdue-item { font-size: 24rpx; color: var(--c-red); line-height: 1.7; margin-top: 6rpx; }
+
+/* 免检流程 */
+.exempt-title { font-size: 26rpx; font-weight: 600; }
+.exempt-item { font-size: 22rpx; line-height: 1.7; margin-top: 4rpx; }

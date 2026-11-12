@@ -1,0 +1,130 @@
+<view class="page-wrap {{isLight ? 'light' : ''}}">
+  <!-- 页头 -->
+  <view class="page-header">
+    <view class="page-title">机动车年检查询</view>
+    <view class="page-subtitle">按 2022 年 10 月新规计算</view>
+  </view>
+
+  <!-- 我的车辆 -->
+  <view class="glass card-gap" wx:if="{{myCars.length > 0}}">
+    <view class="glass-inner">
+      <view class="section-title">我的车辆</view>
+      <view class="mycar-row" wx:for="{{myCars}}" wx:key="id" bindtap="onPickCar" data-idx="{{index}}">
+        <view class="mycar-plate">{{item.plate}}</view>
+        <view class="mycar-meta">{{item.typeName}} · {{item.registerDate}}</view>
+        <view class="mycar-del" catchtap="onDeleteCar" data-id="{{item.id}}">删除</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 查询表单 -->
+  <view class="glass card-gap">
+    <view class="glass-inner">
+      <view class="section-title">查询条件</view>
+
+      <!-- 车辆类型 + 注册日期 -->
+      <view class="field-row">
+        <view class="field-col">
+          <view class="field-label">车辆类型<text class="required-star">*</text></view>
+          <picker mode="selector" range="{{typeLabels}}" value="{{typeIndex}}" bindchange="onTypeChange">
+            <view class="field-box {{typeLabel ? '' : 'placeholder'}}">{{typeLabel || '请选择'}}</view>
+          </picker>
+        </view>
+        <view class="field-col {{dateError ? 'shake' : ''}}">
+          <view class="field-label">注册日期<text class="required-star">*</text></view>
+          <picker mode="date" value="{{dateValue}}" start="1990-01-01" end="{{todayStr}}" bindchange="onDateChange">
+            <view class="field-box {{dateError ? 'error' : (dateText ? '' : 'placeholder')}}">
+              {{dateError ? '请选择注册日期' : (dateText || '点击选择')}}
+            </view>
+          </picker>
+          <view class="field-error-text" wx:if="{{dateError}}">请选择注册日期后再查询</view>
+        </view>
+      </view>
+
+      <!-- 当前周期已年检 -->
+      <view class="check-row" bindtap="togglePeriodDone">
+        <view class="check-box {{periodDone ? 'on' : ''}}">
+          <view class="check-mark" wx:if="{{periodDone}}"></view>
+        </view>
+        <view class="check-text">当前周期已年检或已申领免检标志</view>
+      </view>
+
+      <!-- 免检排除 -->
+      <view class="exclude-title">免检标志排除项（勾选后不适用免检标志）</view>
+      <view class="check-row" bindtap="toggleVan">
+        <view class="check-box {{isVan ? 'on' : ''}}"><view class="check-mark" wx:if="{{isVan}}"></view></view>
+        <view class="check-text">面包车</view>
+      </view>
+      <view class="check-row" bindtap="toggleAccident">
+        <view class="check-box {{hadAccident ? 'on' : ''}}"><view class="check-mark" wx:if="{{hadAccident}}"></view></view>
+        <view class="check-text">曾发生人员伤亡事故</view>
+      </view>
+      <view class="check-row" bindtap="toggleModify">
+        <view class="check-box {{hadModify ? 'on' : ''}}"><view class="check-mark" wx:if="{{hadModify}}"></view></view>
+        <view class="check-text">曾因非法改装被处罚</view>
+      </view>
+
+      <view class="btn-wrap">
+        <view class="btn-primary" bindtap="onQuery">开始查询</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 查询结果 -->
+  <block wx:if="{{result}}">
+    <!-- 状态卡 -->
+    <view class="glass card-gap">
+      <view class="glass-inner status-card">
+        <view class="status-badge c-{{statusColor}}">{{statusTitle}}</view>
+        <view class="status-text {{urgentDays !== null ? 'c-amber' : ''}}">{{result.statusText}}</view>
+
+        <!-- 即刻年检：剩余天数放大 -->
+        <view class="urgent-left" wx:if="{{urgentDays !== null}}">
+          <text class="urgent-label">剩余 </text>
+          <text class="urgent-num">{{urgentDays}}</text>
+          <text class="urgent-label"> 日</text>
+        </view>
+
+        <view class="status-note" wx:if="{{!result.exempt}}">该车不适用免检标志</view>
+
+        <!-- 报废提示 -->
+        <view class="scrap-box {{result.scrapped ? 'red' : 'amber'}}" wx:if="{{result.scrapNote}}">
+          <view class="scrap-title">{{result.scrapped ? '⚠ ' : '♻ '}}{{result.scrapNote}}</view>
+          <view class="scrap-detail" wx:for="{{result.scrapDetail}}" wx:key="*this">{{item}}</view>
+        </view>
+
+        <!-- 免检办理流程 -->
+        <view class="exempt-box" wx:if="{{result.exemptDetail.length > 0}}">
+          <view class="exempt-title">免检期办理流程</view>
+          <view class="exempt-item" wx:for="{{result.exemptDetail}}" wx:key="*this">· {{item}}</view>
+        </view>
+
+        <!-- 逾期后果 -->
+        <view class="overdue-box" wx:if="{{showOverdueNotes}}">
+          <view class="overdue-title">车辆已逾期，请立即办理</view>
+          <view class="overdue-item" wx:for="{{result.notes}}" wx:key="*this">· {{item}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 时间轴 -->
+    <view class="glass opaque card-gap">
+      <view class="glass-inner">
+        <view class="section-title">年检时间轴</view>
+        <view class="timeline">
+          <view class="tl-node {{item.isActive ? 'active' : ''}}" wx:for="{{timelineNodes}}" wx:key="key">
+            <view class="tl-axis">
+              <view class="tl-dot c-bg-{{item.color}}"></view>
+              <view class="tl-line"></view>
+            </view>
+            <view class="tl-body">
+              <view class="tl-title c-{{item.color}}">{{item.title}}</view>
+              <view class="tl-sub c-{{item.color}}">{{item.sub}}</view>
+              <view class="tl-hint" wx:if="{{item.hint}}">{{item.hint}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

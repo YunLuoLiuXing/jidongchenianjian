@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  自适应图标前景层：车牌 + 年检对勾
+  构图全部落在中央 72dp 安全区内（18..90），系统圆/方/水滴遮罩均不裁切
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 车牌外框：白色圆角矩形 -->
+    <path
+        android:pathData="M28,38 h52 a7,7 0 0 1 7,7 v18 a7,7 0 0 1 -7,7 h-52 a7,7 0 0 1 -7,-7 v-18 a7,7 0 0 1 7,-7 z"
+        android:fillColor="#FFFFFFFF" />
+
+    <!-- 车牌内凹槽：露出背景蓝，形成牌照质感 -->
+    <path
+        android:pathData="M31,44 h46 a3,3 0 0 1 3,3 v14 a3,3 0 0 1 -3,3 h-46 a3,3 0 0 1 -3,-3 v-14 a3,3 0 0 1 3,-3 z"
+        android:fillColor="#FF1B4E9E" />
+
+    <!-- 车牌上的两道横杠，抽象表示号牌字符 -->
+    <path
+        android:pathData="M36,51 h14 v3.4 h-14 z"
+        android:fillColor="#FFFFFFFF" />
+    <path
+        android:pathData="M36,57.6 h20 v3.4 h-20 z"
+        android:fillColor="#FFFFFFFF" />
+
+    <!-- 年检对勾：右下角绿色圆底 + 白色勾 -->
+    <path
+        android:pathData="M72,58 m-13,0 a13,13 0 1,0 26,0 a13,13 0 1,0 -26,0 z"
+        android:fillColor="#FF2FBF62"
+        android:strokeColor="#FF1B4E9E"
+        android:strokeWidth="2.4" />
+    <path
+        android:pathData="M65.4,57.8 l4.6,4.6 l8.4,-9.2"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="3.4"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>

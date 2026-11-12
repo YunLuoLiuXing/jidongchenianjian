@@ -1,0 +1,264 @@
+/* 主页面样式 */
+
+/* 我的车辆 */
+.mycar-row {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 24rpx;
+  margin-bottom: 12rpx;
+  border-radius: 20rpx;
+  background: var(--glass-mid);
+  border: 2rpx solid var(--glass-border-bottom);
+}
+
+.mycar-plate {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-right: 16rpx;
+}
+
+.mycar-meta {
+  flex: 1;
+  min-width: 0;
+  font-size: 22rpx;
+  color: var(--text-tertiary);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.mycar-del {
+  font-size: 24rpx;
+  color: var(--c-red);
+  padding: 6rpx 12rpx;
+}
+
+/* 排除项标题 */
+.exclude-title {
+  margin-top: 20rpx;
+  margin-bottom: 6rpx;
+  font-size: 24rpx;
+  color: var(--text-tertiary);
+}
+
+/* 按钮容器 */
+.btn-wrap {
+  margin-top: 32rpx;
+}
+
+/* 状态卡 */
+.status-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.status-badge {
+  font-size: 44rpx;
+  font-weight: 700;
+  letter-spacing: -0.5rpx;
+  line-height: 1.25;
+}
+
+.status-text {
+  margin-top: 12rpx;
+  font-size: 27rpx;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* 即刻年检剩余天数 */
+.urgent-left {
+  margin-top: 18rpx;
+  display: flex;
+  align-items: baseline;
+}
+
+.urgent-label {
+  font-size: 30rpx;
+  color: var(--text-secondary);
+}
+
+.urgent-num {
+  font-size: 88rpx;
+  font-weight: 700;
+  color: var(--c-red);
+  line-height: 1;
+  margin: 0 10rpx;
+  letter-spacing: -2rpx;
+}
+
+.status-note {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: var(--text-tertiary);
+}
+
+/* 报废提示 */
+.scrap-box {
+  margin-top: 20rpx;
+  padding: 20rpx 24rpx;
+  border-radius: 20rpx;
+}
+
+.scrap-box.amber {
+  background: rgba(255, 159, 10, 0.14);
+}
+
+.scrap-box.red {
+  background: rgba(255, 69, 58, 0.16);
+}
+
+.scrap-title {
+  font-size: 25rpx;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.scrap-box.amber .scrap-title { color: var(--c-amber); }
+.scrap-box.red .scrap-title { color: var(--c-red); }
+
+.scrap-detail {
+  margin-top: 8rpx;
+  font-size: 23rpx;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* 免检流程 */
+.exempt-box {
+  margin-top: 20rpx;
+  padding: 20rpx 24rpx;
+  border-radius: 20rpx;
+  background: rgba(76, 142, 245, 0.14);
+}
+
+.exempt-title {
+  font-size: 25rpx;
+  font-weight: 600;
+  color: var(--accent-top);
+  margin-bottom: 8rpx;
+}
+
+.exempt-item {
+  font-size: 23rpx;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+/* 逾期后果 */
+.overdue-box {
+  margin-top: 20rpx;
+  padding: 20rpx 24rpx;
+  border-radius: 20rpx;
+  background: rgba(255, 69, 58, 0.14);
+}
+
+.overdue-title {
+  font-size: 25rpx;
+  font-weight: 700;
+  color: var(--c-red);
+  margin-bottom: 8rpx;
+}
+
+.overdue-item {
+  font-size: 23rpx;
+  line-height: 1.7;
+  color: var(--c-red);
+  opacity: 0.9;
+}
+
+/* 时间轴 */
+.timeline {
+  padding-top: 4rpx;
+}
+
+.tl-node {
+  display: flex;
+  padding: 12rpx 0;
+  border-radius: 16rpx;
+}
+
+.tl-node.active {
+  background: rgba(255, 69, 58, 0.12);
+  padding: 16rpx 12rpx;
+  margin: 4rpx 0;
+}
+
+.tl-axis {
+  width: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.tl-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-top: 10rpx;
+  flex-shrink: 0;
+}
+
+.tl-node.active .tl-dot {
+  width: 22rpx;
+  height: 22rpx;
+  margin-top: 8rpx;
+}
+
+.tl-line {
+  width: 3rpx;
+  flex: 1;
+  min-height: 40rpx;
+  background: var(--glass-border-bottom);
+  margin-top: 6rpx;
+}
+
+.tl-node:last-child .tl-line {
+  display: none;
+}
+
+.tl-body {
+  flex: 1;
+  min-width: 0;
+  padding-left: 8rpx;
+}
+
+.tl-title {
+  font-size: 28rpx;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.tl-node.active .tl-title {
+  font-size: 54rpx;
+  font-weight: 700;
+  letter-spacing: -1rpx;
+  line-height: 1.25;
+}
+
+.tl-sub {
+  font-size: 24rpx;
+  line-height: 1.5;
+  margin-top: 2rpx;
+  opacity: 0.9;
+}
+
+.tl-node.active .tl-sub {
+  font-size: 46rpx;
+  font-weight: 700;
+  letter-spacing: -0.5rpx;
+}
+
+.tl-hint {
+  font-size: 22rpx;
+  color: var(--c-red);
+  margin-top: 4rpx;
+}
+
+/* 圆点背景色 */
+.c-bg-gray { background: var(--c-gray); }
+.c-bg-green { background: var(--c-green); }
+.c-bg-amber { background: var(--c-amber); }
+.c-bg-red { background: var(--c-red); }
